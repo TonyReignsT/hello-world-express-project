@@ -1,0 +1,84 @@
+// const db = require("../config/db")
+const categoryService = require("./categories.service")
+
+
+// creating a category
+exports.createCategory = async (req, res) => {
+    try {
+        const {category_name, description} = req.body
+
+        const category = await categoryService.createCategory(category_name, description)
+
+        res.status(201).json({
+            success: true,
+            message: "Category Created Successfully",
+            data: category
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+
+// Getting all categories
+exports.getCategories = async (req, res) => {
+    // res.send("Categories route is working!")
+    try {
+        const categories = await categoryService.getCategories()
+        // res.json(categories.rows)
+
+
+        res.status(200).json({
+            success: true,
+            count: categories.length,
+            data: categories
+        })
+    } catch (error) {
+        // console.error("Could not get categories!!", error.message)
+        res.status(500).json({success: false, message: error.message})
+    }
+}
+
+// updating category
+exports.updateCategory = async (req, res) => {
+    try {
+        const {id} = req.params;
+
+        const {category_name, description} = req.body
+        const updatedCategory = await categoryService.updateCategory(id, category_name, description)
+
+        res.status(200).json({
+            success: true,
+            message: "Category updated successfully",
+            data: updatedCategory
+        })
+    } catch(error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+// deleting category
+exports.deleteCategory = async (req, res) => {
+    try {
+        const {id} = req.params
+
+        const deletedCategory = await categoryService.deleteCategory(id)
+
+        res.status(200).json({
+            success: true,
+            message: "Category deleted successfully",
+            data: deletedCategory
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}

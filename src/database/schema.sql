@@ -51,7 +51,9 @@ INSERT INTO categories (category_name, description)
 VALUES (
         'Electronics',
         'Electronic devices and accessories'
-    ) -- inserting users
+    ) 
+
+-- inserting users
 INSERT INTO users (name, email, password_hash, role)
 VALUES (
         'admin',
