@@ -44,42 +44,6 @@ CREATE TABLE transactions (
 );
 
 
--- inserting sample data
-
--- adding categories
-INSERT INTO categories (category_name, description)
-VALUES (
-        'Electronics',
-        'Electronic devices and accessories'
-    ) 
-
--- inserting users
-INSERT INTO users (name, email, password_hash, role)
-VALUES (
-        'admin',
-        'admin@gmail.com',
-        'admin',
-        'admin'
-    );
-
-
--- adding inventory
-INSERT INTO inventory_items (
-        item_name,
-        description,
-        quantity,
-        unit_price,
-        category_id
-    )
-VALUES (
-        'Lenovo Thinkpad X1 carbon',
-        'Laptop computer',
-        10,
-        45000.00,
-        1
-    );
-
-
 -- Relationship - Joins
 SELECT 
 	inventory_items.item_name,

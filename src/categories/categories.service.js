@@ -17,6 +17,17 @@ exports.getCategories = async () => {
   return await db.query("SELECT * FROM categories");
 };
 
+// getting a single category
+exports.getCategoryById = async (id) => {
+    const result = await db.query(
+        `SELECT * FROM categories
+        WHERE id = $1`,
+        [id]
+    )
+
+    return result.rows[0]
+}
+
 // updating a category
 exports.updateCategory =  async (id, category_name, description) => {
     const result = await db.query(
