@@ -5,7 +5,7 @@ exports.createUser = async (name, email, password_hash, role) => {
     const result = await db.query(
         `INSERT INTO users (name, email, password_hash, role)
         VALUES ($1, $2, $3, $4)
-        RETURNING *`,
+        RETURNING id, name, email, role`,
         [name, email, password_hash, role]
     )
 
@@ -14,13 +14,13 @@ exports.createUser = async (name, email, password_hash, role) => {
 
 // getting all users
 exports.getUsers = async () => {
-    return await db.query("SELECT * FROM users");
+    return await db.query("SELECT id, email, role FROM users")
 };
 
 // getting a user by id
 exports.getUserById = async (id) => {
     const result = await db.query(
-        `SELECT * FROM users
+        `SELECT id, name, email, role FROM users
         WHERE id = $1`,
         [id]
     )
@@ -35,7 +35,7 @@ exports.updateUser = async (id, name, email, password_hash, role) => {
         `UPDATE users
         SET name = $1, email = $2, password_hash = $3, role = $4
         WHERE id = $5
-        RETURNING *`,
+        RETURNING id, name, email, role`,
         [name, email, password_hash, role, id] // the id goes last to match $5
     )
 
@@ -46,8 +46,7 @@ exports.updateUser = async (id, name, email, password_hash, role) => {
 exports.deleteUser = async (id) => {
     const result = await db.query(
         `DELETE FROM users
-        WHERE id = $1
-        RETURNING *`,
+        WHERE id = $1`,
         [id]
     )
 
