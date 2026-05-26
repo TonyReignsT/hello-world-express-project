@@ -5,6 +5,7 @@ require('dotenv').config()
 const categoryRoutes = require("./categories/categories.routes") // importing categories route
 const userRoutes = require("./users/users.routes")
 const inventoryRoutes = require("./inventory-items/inventory-items.routes")
+const transactionRoutes = require("./transactions/transactions.routes")
 
 const app = express()
 
@@ -18,5 +19,6 @@ app.get('/', (req, res) => {
 app.use("/categories", categoryRoutes)
 app.use("/users", userRoutes)
 app.use("/inventory", inventoryRoutes)
+app.use("/transactions", transactionRoutes)
 
 module.exports = app
