@@ -28,6 +28,15 @@ exports.createItem = async (req, res) => {
       data: item,
     });
   } catch (error) {
+    // if incorrect or unavailable category_id is provided
+    if (error.code === "23503") {
+      // postgresql error code for foreign key violation (referencing a non-existent id)
+      return res.status(400).json({
+        success: false,
+        message: "Category not found. Please provide a valid category_id",
+      });
+    }
+
     res.status(500).json({
       success: false,
       message: error.message,
