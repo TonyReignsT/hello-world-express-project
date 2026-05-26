@@ -14,7 +14,9 @@ exports.createUser = async (name, email, password_hash, role) => {
 
 // getting all users
 exports.getUsers = async () => {
-    return await db.query("SELECT id, email, role FROM users")
+    return result = await db.query("SELECT id, name, email, role FROM users")
+
+    return result.rows
 };
 
 // getting a user by id
