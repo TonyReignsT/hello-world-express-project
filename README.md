@@ -27,6 +27,7 @@ The software was developed using the following tools:
 - Git
 - GitHub
 - Thunder Client (API testing)
+- Postman (API testing)
 
 The programming language used is JavaScript (Node.js, Express.js).
 
