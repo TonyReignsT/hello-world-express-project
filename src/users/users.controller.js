@@ -85,15 +85,14 @@ exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const { name, email, password_hash, role } = req.body;
+    const { name, email, password_hash } = req.body;
     // hashing the password before updating
     const hashedPassword = await bcrypt.hash(password_hash, 10);
     const updatedUser = await userService.updateUser(
       id,
       name,
       email,
-      hashedPassword,
-      role,
+      hashedPassword
     );
 
     if (!updatedUser) {

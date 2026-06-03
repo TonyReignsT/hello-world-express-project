@@ -33,13 +33,13 @@ exports.getUserById = async (id) => {
 };
 
 // updating a user
-exports.updateUser = async (id, name, email, password_hash, role) => {
+exports.updateUser = async (id, name, email, password_hash) => {
   const result = await db.query(
     `UPDATE users
-        SET name = $1, email = $2, password_hash = $3, role = $4
-        WHERE id = $5
+        SET name = $1, email = $2, password_hash = $3
+        WHERE id = $4
         RETURNING id, name, email, role`,
-    [name, email, password_hash, role, id], // the id goes last to match $5
+    [name, email, password_hash, id], // the id goes last to match $5
   );
 
   return result.rows[0];
