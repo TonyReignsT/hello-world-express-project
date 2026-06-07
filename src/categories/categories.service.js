@@ -14,7 +14,8 @@ exports.createCategory = async (category_name, description) => {
 
 // Finding all categories
 exports.getCategories = async () => {
-  return await db.query("SELECT * FROM categories");
+    const result = await db.query("SELECT * FROM categories");
+    return result.rows
 };
 
 // getting a single category
